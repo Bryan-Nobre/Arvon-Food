@@ -3,7 +3,7 @@
 SaaS multi-tenant de gestão operacional para restaurantes — PDV, mesas e comandas, cozinha (KDS), caixa, estoque e administração da plataforma.
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="Dashboard do Arvon Food" width="820" />
+  <img src="https://i.ibb.co/WpkSQTrw/dashboard.png" alt="Dashboard do Arvon Food" width="820" />
 </p>
 
 ---
@@ -61,7 +61,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Login</strong></p>
 <p align="center">
-  <img src="docs/screenshots/login.png" alt="Tela de login" width="720" />
+  <img src="https://i.ibb.co/b5cDgxvV/login.png" alt="Tela de login" width="720" />
 </p>
 <p align="center"><em>Acesso com e-mail e senha. Cadastro aberto só para aceitar convite de equipe.</em></p>
 
@@ -69,7 +69,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Dashboard</strong></p>
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="Dashboard operacional" width="820" />
+  <img src="https://i.ibb.co/WpkSQTrw/dashboard.png" alt="Dashboard operacional" width="820" />
 </p>
 <p align="center"><em>Resumo do dia: vendas, ticket médio, cozinha e ocupação de mesas.</em></p>
 
@@ -77,7 +77,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Pedidos (PDV)</strong></p>
 <p align="center">
-  <img src="docs/screenshots/pedidos.png" alt="PDV e pedidos" width="820" />
+  <img src="https://i.ibb.co/9dvgMZ9/pedidos.png" alt="PDV e pedidos" width="820" />
 </p>
 <p align="center"><em>Catálogo, filtros de status e montagem de pedido (balcão, mesa ou comanda).</em></p>
 
@@ -85,7 +85,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Mesas</strong></p>
 <p align="center">
-  <img src="docs/screenshots/mesas.png" alt="Mapa de mesas" width="820" />
+  <img src="https://i.ibb.co/bgvbZSjX/mesas.png" alt="Mapa de mesas" width="820" />
 </p>
 <p align="center"><em>Salão em lista e mapa, com status livre, ocupada e aguardando pagamento.</em></p>
 
@@ -93,7 +93,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Cozinha</strong></p>
 <p align="center">
-  <img src="docs/screenshots/cozinha.png" alt="KDS da cozinha" width="820" />
+  <img src="https://i.ibb.co/wZDy6gsr/cozinha.png" alt="KDS da cozinha" width="820" />
 </p>
 <p align="center"><em>KDS por setor (ex.: Cozinha, Bar) com colunas de novos, em preparo e prontos.</em></p>
 
@@ -101,7 +101,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Caixa</strong></p>
 <p align="center">
-  <img src="docs/screenshots/caixa.png" alt="Módulo de caixa" width="820" />
+  <img src="https://i.ibb.co/v9DBs40/caixa.png" alt="Módulo de caixa" width="820" />
 </p>
 <p align="center"><em>Abertura de sessão com fundo de troco e histórico do último fechamento.</em></p>
 
@@ -109,7 +109,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Estoque</strong></p>
 <p align="center">
-  <img src="docs/screenshots/estoque.png" alt="Controle de estoque" width="820" />
+  <img src="https://i.ibb.co/23wRS8Xw/estoque.png" alt="Controle de estoque" width="820" />
 </p>
 <p align="center"><em>KPIs, bipagem, transações recentes e lista de insumos com saldo mínimo.</em></p>
 
@@ -117,7 +117,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 <p align="center"><strong>Admin da plataforma</strong></p>
 <p align="center">
-  <img src="docs/screenshots/admin.png" alt="Admin da plataforma" width="820" />
+  <img src="https://i.ibb.co/JjLYqqrg/admin.png" alt="Admin da plataforma" width="820" />
 </p>
 <p align="center"><em>Provisionamento de empresas, métricas agregadas e suporte temporário.</em></p>
 

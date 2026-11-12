@@ -6,43 +6,43 @@ SaaS multi-tenant de gestão operacional para restaurantes — PDV, mesas e coma
   <img src="https://i.ibb.co/WpkSQTrw/dashboard.png" alt="Dashboard do Arvon Food" width="820" />
 </p>
 
+> Repositório de **portfólio**. O código-fonte do produto permanece privado; aqui está a apresentação do case.
+
 ---
 
 ## Visão geral
 
 O Arvon Food organiza o dia a dia do restaurante em um único produto web: do pedido no balcão ou na mesa até a produção na cozinha, o recebimento no caixa e o controle de insumos.
 
-Cada restaurante é uma **empresa** isolada. Usuários entram como **membros** com papéis definidos. Regras financeiras, estoque, permissões e isolamento entre tenants são garantidos no **PostgreSQL** (RLS e RPCs), não apenas na interface.
-
-O código-fonte deste repositório permanece **privado**. Este README apresenta o produto como case de portfólio.
+Cada restaurante opera de forma isolada. Usuários entram com papéis definidos. Regras financeiras, estoque, permissões e isolamento entre clientes são garantidos no **banco de dados**, não apenas na interface.
 
 ---
 
 ## Principais funcionalidades
 
-- **PDV / Pedidos** — montagem de pedido no balcão ou vinculado a mesa/comanda, com catálogo, adicionais e estados operacionais e financeiros separados
+- **PDV / Pedidos** — montagem de pedido no balcão ou vinculado a mesa/comanda, com catálogo e estados operacionais e financeiros separados
 - **Mesas e comandas** — mapa do salão, abertura de comanda, pedido de conta e transferência entre mesas
 - **Cozinha (KDS)** — filas por setor, avanço de status e impressão de comanda pelo navegador
 - **Caixa** — abertura/fechamento de sessão, sangria, suprimento e recebimentos (incluindo pagamento parcial)
-- **Estoque** — movimentações auditáveis, alerta de baixo estoque e bipagem por leitor USB ou câmera
-- **Cadastros** — produtos, categorias, adicionais, clientes, equipe e configurações da empresa
-- **Convites de equipe** — entrada de membros por link (sem cadastro público de restaurante)
-- **Admin da plataforma** — criação de empresas e logins, métricas leves, pausa/reativação e acesso temporário de suporte
-- **Offline parcial** — fila local para abrir mesa, criar pedido e pedir conta; operações críticas exigem conexão
-- **Realtime** — atualizações por empresa no salão, cozinha e caixa
+- **Estoque** — movimentações com histórico, alerta de baixo estoque e bipagem por leitor ou câmera
+- **Cadastros** — produtos, categorias, adicionais, clientes, equipe e configurações do restaurante
+- **Convites de equipe** — entrada de membros por convite (sem auto-cadastro público de restaurante)
+- **Admin da plataforma** — provisionamento de restaurantes, métricas leves e acesso temporário de suporte
+- **Offline parcial** — algumas ações de salão podem ser enfileiradas sem internet; operações críticas exigem conexão
+- **Tempo real** — salão, cozinha e caixa atualizam entre dispositivos do mesmo restaurante
 
 ---
 
 ## Destaques técnicos
 
-| Tema | Abordagem no produto |
-| ---- | -------------------- |
-| Multi-tenancy | Isolamento por `empresa_id` com RLS e helpers de autorização no schema `app` |
-| Fonte da verdade | Operações críticas via RPCs Postgres (`SECURITY DEFINER`), não só pelo React |
-| Papéis | `owner`, `admin`, `cashier`, `waiter`, `kitchen` — UI filtra módulos; banco autoriza |
-| Idempotência | `client_request_id` em ações offline e operações que não podem duplicar |
-| Snapshots | Pedidos preservam nome/preço/adicionais do momento da venda |
-| Tema | Interface clara com modo escuro |
+| Tema | Abordagem |
+| ---- | --------- |
+| Multi-tenancy | Isolamento por restaurante, com políticas no banco |
+| Fonte da verdade | Operações críticas validadas e persistidas no servidor |
+| Papéis | Proprietário, administrador, caixa, garçom e cozinha — a UI filtra; o banco autoriza |
+| Consistência | Evita duplicar operações críticas em retries e sincronização |
+| Histórico de venda | Pedidos preservam o que foi vendido, mesmo se o cardápio mudar depois |
+| Experiência | Interface clara, com modo escuro |
 
 ---
 
@@ -50,10 +50,10 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 
 | Camada | Tecnologias |
 | ------ | ----------- |
-| Frontend | React 19, TypeScript, Vite, TanStack Start / Router / Query, Tailwind CSS 4, Radix UI, React Hook Form, Zod, Lucide |
-| Backend / dados | Supabase (Auth, PostgreSQL, Realtime, Storage), migrations SQL versionadas, RPCs e RLS |
-| Offline / leitura | IndexedDB (fila local), Service Worker, ZXing (código de barras) |
-| UX | Sonner, Recharts, impressão HTML 80mm via navegador |
+| Frontend | React, TypeScript, Vite, TanStack (Start / Router / Query), Tailwind CSS, Radix UI, React Hook Form, Zod |
+| Backend / dados | Supabase (Auth, PostgreSQL, Realtime, Storage), SQL versionado, funções e políticas no banco |
+| Offline / leitura | Persistência local, Service Worker, leitura de código de barras |
+| UX | Toasts, gráficos, impressão de comanda/recibo pelo navegador |
 
 ---
 
@@ -95,7 +95,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 <p align="center">
   <img src="https://i.ibb.co/wZDy6gsr/cozinha.png" alt="KDS da cozinha" width="820" />
 </p>
-<p align="center"><em>KDS por setor (ex.: Cozinha, Bar) com colunas de novos, em preparo e prontos.</em></p>
+<p align="center"><em>KDS por setor com colunas de novos, em preparo e prontos.</em></p>
 
 <br />
 
@@ -111,7 +111,7 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 <p align="center">
   <img src="https://i.ibb.co/23wRS8Xw/estoque.png" alt="Controle de estoque" width="820" />
 </p>
-<p align="center"><em>KPIs, bipagem, transações recentes e lista de insumos com saldo mínimo.</em></p>
+<p align="center"><em>Indicadores, bipagem, movimentações recentes e insumos com saldo mínimo.</em></p>
 
 <br />
 
@@ -119,32 +119,30 @@ O código-fonte deste repositório permanece **privado**. Este README apresenta 
 <p align="center">
   <img src="https://i.ibb.co/JjLYqqrg/admin.png" alt="Admin da plataforma" width="820" />
 </p>
-<p align="center"><em>Provisionamento de empresas, métricas agregadas e suporte temporário.</em></p>
+<p align="center"><em>Provisionamento de restaurantes, métricas agregadas e suporte temporário.</em></p>
 
 ---
 
 ## Arquitetura (resumo)
 
 ```text
-Cliente (React / TanStack)
+Cliente web (React)
         │
         ▼
-Supabase Auth + API (anon key)
+Autenticação + API gerenciada
         │
         ▼
-PostgreSQL  ── RLS por tenant
-            ── RPCs de negócio
-            ── Realtime filtrado
-            ── Storage (imagens)
+PostgreSQL  ── isolamento por restaurante
+            ── regras de negócio no servidor
+            ── tempo real por tenant
+            ── armazenamento de imagens
 ```
 
-- **Frontend:** UX, formulários, cache (TanStack Query) e fila offline.
-- **Banco:** isolamento multi-tenant, state machines, totais financeiros e auditoria.
-- **Plataforma:** admins fora do papel da empresa, com RPCs dedicadas.
+- **Frontend:** experiência, formulários, cache e fila offline limitada.
+- **Banco:** autorização, totais, estados válidos e auditoria.
+- **Plataforma:** gestão SaaS separada dos papéis do restaurante.
 
 Detalhes em **[docs/arquitetura.md](docs/arquitetura.md)**.
-
-Documentação interna complementar: [status do produto](docs/status-do-produto.md), [PRD](docs/prd.md), [roadmap](docs/roadmap.md).
 
 ---
 
@@ -153,8 +151,8 @@ Documentação interna complementar: [status do produto](docs/status-do-produto.
 | Aspecto | Situação |
 | ------- | -------- |
 | Operação do restaurante | MVP utilizável (vendas, mesas, cozinha, caixa, estoque, equipe) |
-| Admin SaaS | MVP (criar empresa/login, pausar, suporte) |
-| Impressão | Comanda/recibo via diálogo do navegador (não fiscal) |
-| Fora do escopo atual | TEF/maquininha, NFC-e, iFood, cardápio QR, delivery avançado |
+| Admin SaaS | MVP (criar restaurante/login, pausar, suporte) |
+| Impressão | Comanda/recibo via navegador (não fiscal) |
+| Próximas evoluções | Integrações de pagamento, fiscal e canais de pedido |
 
-Produto em evolução contínua, com foco em segurança multi-tenant e operação real de restaurante.
+Produto em evolução, com foco em segurança multi-tenant e operação real de restaurante.
